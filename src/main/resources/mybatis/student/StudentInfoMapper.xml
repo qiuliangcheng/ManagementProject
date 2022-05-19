@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yizhi.student.dao.StudentInfoDao">
+
+
+
+    <sql id="StudentInfoColumns">
+
+    </sql>
+
+
+    <sql id="StudentInfoJoins">
+
+    </sql>
+
+<select id="get" resultType="com.yizhi.student.domain.StudentInfoDO">
+        select * from s_student_info where id=#{id}
+</select>
+
+    <select id="list" resultType="com.yizhi.student.domain.StudentInfoDO">
+    select * from  s_student_info
+        <where>
+            <if test="name!= '' and name!= null">
+                student_name like CONCAT('%',#{name},'%')
+            </if>
+            <if test="tocollegeId != '' and tocollegeId != null">
+                and tocollege= #{tocollegeId}
+            </if>
+            <if test="tomajorId != '' and tomajorId != null">
+                and tomajor = #{tomajorId}
+            </if>
+            <if test="classId != '' and classId != null">
+                and class_id = #{classId}
+            </if>
+        </where>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <update id="update" parameterType="com.yizhi.student.domain.StudentInfoDO">
+    update s_student_info set student_id=#{studentId},
+    exam_id=#{examId},
+    card_id=#{cardId},
+    student_name=#{studentName},
+    certify=#{certify},
+    mail_address=#{mailAddress},
+    foreign_lanaguage=#{foreignLanaguage},
+    student_sex=#{studentSex},
+    nation=#{nation},
+    political=#{political},
+    card_id=#{cardId},
+    telephone=#{telephone},
+    subject_type=#{subjectType},
+    tocollege=#{tocollege},
+    tocampus=#{tocampus},
+    tomajor=#{tomajor},
+    birthplace=#{birthplace},
+    grade=#{grade},
+    isstate=#{isstate},
+    birthday=#{birthday},
+    note=#{note},
+    add_time=#{addTime},
+    add_userid=#{addUserid},
+    edit_time=#{editTime},
+    edit_userid=#{editUserid}
+    where id=#{id}
+    </update>
+
+
+    <select id="count" resultType="int">
+    select count(*) from s_student_info
+        <where>
+            <if test="name!= '' and name!= null">
+                student_name like CONCAT('%',#{name},'%')
+            </if>
+            <if test="tocollegeId != '' and tocollegeId != null">
+                and tocollege= #{tocollegeId}
+            </if>
+            <if test="tomajorId != '' and tomajorId != null">
+                and tomajor = #{tomajorId}
+            </if>
+            <if test="classId != '' and classId != null">
+                and class_id = #{classId}
+            </if>
+        </where>
+
+    </select>
+
+    <insert id="save" parameterType="com.yizhi.student.domain.StudentInfoDO" useGeneratedKeys="true" keyProperty="id">
+     insert into s_student_info values
+     (null ,
+     #{studentId},
+     #{examId},
+     #{cardId},
+     #{studentName},
+     #{certify},
+     #{mailAddress},
+     #{foreignLanaguage},
+     #{studentSex},
+     #{nation},
+     #{political},
+     #{cardId},
+     #{telephone},
+     #{subjectType},
+     #{tocollege},
+     #{tocampus},
+     #{tomajor},
+     #{birthplace},
+     #{grade},
+     #{isstate},
+     #{birthday},
+     #{note},
+     #{addTime},
+     #{addUserid},
+     #{editTime},
+     #{editUserid})
+    </insert>
+
+
+    <delete id="remove">
+      delete from s_student_info where id=#{id}
+    </delete>
+
+    <delete id="batchRemove">
+        delete from s_student_info where
+        <foreach collection="ids" item="id" separator="or">
+            id=#{id}
+        </foreach>
+    </delete>
+
+</mapper>
