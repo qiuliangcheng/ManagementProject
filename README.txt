@@ -12,10 +12,6 @@
 http://localhost:8080/index
 平台登录帐号: admin 密码: 111111
 
-
 模块:  学生管理模块
-
-需要操作的类:   com.yizhi.student.controller.StudentInfoController
-需要完成的功能:  学生信息的,save保存接口,list查询接口(无条件,多条件,分页),update修改接口,remove删除,batchRemove批量删除
 
 mybatis映射文件: 完成 mybits/student/StudentInfoMapper.xml
